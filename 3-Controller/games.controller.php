@@ -20,7 +20,6 @@ class gamesController{
 
     function showHome(){
         $check = $this->helper->logged();
-
         $this->gamesView->showHome($check);
     }
 
@@ -49,7 +48,6 @@ class gamesController{
     }
 // ABM DE JUEGOS
     function addJuego(){
-
         $nombre = $_POST['nombre']; 
         $f_d_l = $_POST['fechalanzamiento']; 
         $desarrollador = $_POST['desarrollador'];
@@ -57,8 +55,10 @@ class gamesController{
         $descripcion = $_POST['descripcion'];
         $id_genero = $_POST['idgenero'];
             
-        $this->gamesModel->addJuego($nombre, $f_d_l, $desarrollador, $precio, $descripcion, $id_genero);
-        $this->gamesView->showTodosLosJuegos();
+        if( isset($nombre) && isset($f_d_l) && isset($desarrollador) && isset($precio) && isset($descripcion) && isset($id_genero) ){
+            $this->gamesModel->addJuego($nombre, $f_d_l, $desarrollador, $precio, $descripcion, $id_genero);
+            $this->gamesView->showTodosLosJuegos();
+        }
     }
 
     function showFormulario(){
