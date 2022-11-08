@@ -2,17 +2,19 @@
 //controlador es el que se encarga de las operaciones y del modelo y la vista
 
 require_once './1-Model/games.model.php';
+require_once './1-Model/genre.model.php';
 require_once './2-View/games.view.php';
 require_once './Helper/AuthHelper.php';
 
 class gamesController{
+    private $genreModel;
     private $gamesModel;
     private $gamesView;
     private $helper;
 
     function __construct()
     {
-
+        $this->genreModel = new genreModel();
         $this->gamesModel = new gamesModel();
         $this->gamesView = new gamesView();
         $this->helper = new AuthHelper();
@@ -29,15 +31,9 @@ class gamesController{
         $this->gamesView->showJuego($lista, $check);
     }
 
-    function showCategoria(){
-        $check = $this->helper->logged();
-        $listCategorias = $this->gamesModel->getCategorias();
-        $this->gamesView->showCategoria($listCategorias, $check);
-    }
-
     function showGameInfo($id){
         $juego = $this->gamesModel->getJuego($id);
-        $genero = $this->gamesModel->getCategoria($juego->id_genero);//
+        $genero = $this->genreModel->getCategoria($juego->id_genero);//
         $this->gamesView->showJuegoInfo($juego, $genero->nombregenero);
 
     }
@@ -54,21 +50,33 @@ class gamesController{
         $precio = $_POST['precio'];
         $descripcion = $_POST['descripcion'];
         $id_genero = $_POST['idgenero'];
-            
-        if( isset($nombre) && isset($f_d_l) && isset($desarrollador) && isset($precio) && isset($descripcion) && isset($id_genero) ){
-            $this->gamesModel->addJuego($nombre, $f_d_l, $desarrollador, $precio, $descripcion, $id_genero);
-            $this->gamesView->showTodosLosJuegos();
+        $check = $this->helper->logged();    
+
+        if($check == "Logeado"){
+            if(isset($nombre) && isset($f_d_l) && isset($desarrollador) && isset($precio) && isset($descripcion) && isset($id_genero) ){
+                $this->gamesModel->addJuego($nombre, $f_d_l, $desarrollador, $precio, $descripcion, $id_genero);
+                $this->gamesView->showTodosLosJuegos();
+            }
         }
+
     }
 
     function showFormulario(){
-        $generos=$this->gamesModel->getCategorias();
-        $this->gamesView->showFormulario($generos);
+        $check = $this->helper->logged();
+
+        if ($check == "Logeado"){
+            $generos=$this->genreModel->getCategorias();
+            $this->gamesView->showFormulario($generos);
+        }
     }
 
     function deleteJuego($id){
-        $this->gamesModel->deleteJuego($id);
-        $this->gamesView->showTodosLosJuegos();
+        $check = $this->helper->logged();
+
+        if ($check == "Logeado" && isset($id)){
+            $this->gamesModel->deleteJuego($id);
+            $this->gamesView->showTodosLosJuegos();
+        }
     }
 
     function editJuego(){
@@ -92,58 +100,22 @@ class gamesController{
 
     function showFormularioEdit($id){
 
-        if ($id != null){
-            if (isset($id)) {
-                $generos = $this->gamesModel->getCategorias();
-                $this->gamesView->showFormularioEditar($generos, $id);
-            } else {
-                $this->gamesView->showTodosLosJuegos();
-            }
-        }
-    }
-    //ABM DE CATEGORIAS/GENEROS
-    function showFormularioGenero(){
-        $generos=$this->gamesModel->getCategorias();
-        $this->gamesView->showFormularioGenero($generos);
-    }
-
-    function addGenero(){
-            $genero = $_POST['newgenero'];
-            $this->gamesModel->addGenero($genero);
-            $this->gamesView->showTodosLosGeneros();        
-    }
-
-    function deleteGenero($id){
-        $this->gamesModel->deleteGenero($id);
-        $this->gamesView->showTodosLosGeneros();
-    }
-
-    function showFormularioEditGenero($id){
-        if ($id != null){
-            if (isset($id)) {
-                $this->gamesView->showFormularioGeneroEditar($id);
-            } else {
-                $this->gamesView->showTodosLosGeneros();
-            }
-        }
-    }
-
-    function editGenero(){
-        $id = $_POST['idgenero'];
-        $nombre = $_POST['editnombregenero'];
         $check = $this->helper->logged();
 
-        var_dump($id);
-        var_dump($nombre);
-        if(($check == 'Logeado')&&(isset($id))&&(isset($nombre))){
-            $this->gamesModel->editGenero($nombre,$id);
-            $this->gamesView->showTodosLosGeneros();  
-        }
-        else{
-            $this->gamesView->showHomeLocation(); 
+        if ($check == "Logeado"){
+
+            if ($id != null){
+                if (isset($id)) {
+                    $generos = $this->genreModel->getCategorias();
+                    $datos = $this->gamesModel->getNombre();
+                    $this->gamesView->showFormularioEditar($generos, $id, $datos);
+                } else {
+                    $this->gamesView->showTodosLosJuegos();
+                }
+            }
         }
     }
-
+    
 }
 
 ?>

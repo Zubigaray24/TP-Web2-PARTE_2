@@ -1,9 +1,11 @@
 <?php
 
 class AuthHelper {
+    private $gamesModel;
+
     function __construct()
     {
-
+        $gamesModel = new gamesModel();
     }
 
     function CheckLoggedIn(){
@@ -22,6 +24,8 @@ class AuthHelper {
         else{
             return "Deslogeado";
         }
-    } 
+    }
+
+
 
 }

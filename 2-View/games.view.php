@@ -56,7 +56,7 @@ class gamesView{
         $this->smarty->display('templates/agregarJuego.tpl');
     }
 
-    function showFormularioEditar($generos, $id){
+    function showFormularioEditar($generos, $id,){
         $this->smarty->assign('id', $id);
         $this->smarty->assign('generos', $generos);
         $this->smarty->display('templates/editarJuego.tpl');

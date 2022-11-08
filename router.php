@@ -1,6 +1,7 @@
 <?php
     require_once './3-Controller/games.controller.php';
     require_once('./3-Controller/login.controller.php');
+    require_once ('./3-Controller/genre.controller.php');
 
     define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
@@ -14,6 +15,7 @@
     // parsea la accion Ej: suma/1/2 --> ['suma', 1, 2]
     $params = explode('/', $action);
 
+    $genreController = new genreController();
     $gamesController = new gamesController();
     $loginController = new logincontroller();
 
@@ -31,7 +33,7 @@
             $gamesController->showGameInfo($params[1]);
             break;
         case 'todoslosgeneros':  
-            $gamesController->showCategoria();
+            $genreController->showCategoria();
             break;
         case 'genero':
             $gamesController->showJuegosPorGenero($params[1]);
@@ -70,19 +72,19 @@
             break;
         //ABM DE CATEGORIAS/GENEROS
         case 'mostrarFormularioGenero':
-            $gamesController->showFormularioGenero();
+            $genreController->showFormularioGenero();
             break;
         case 'agregarGenero':
-            $gamesController->addGenero();
+            $genreController->addGenero();
             break;
         case 'showFormularioEditarGenero':
-            $gamesController->showFormularioEditGenero($params[1]);
+            $genreController->showFormularioEditGenero($params[1]);
             break;
         case 'editarGenero':
-            $gamesController->editGenero();
+            $genreController->editGenero();
             break;
         case 'borrarGenero':
-            $gamesController->deleteGenero($params[1]);
+            $genreController->deleteGenero($params[1]);
             break;
         default: 
             echo('404 Page not found'); 
