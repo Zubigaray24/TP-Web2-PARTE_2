@@ -73,9 +73,29 @@ class gamesController{
     function deleteJuego($id){
         $check = $this->helper->logged();
 
-        if ($check == "Logeado" && isset($id)){
-            $this->gamesModel->deleteJuego($id);
-            $this->gamesView->showTodosLosJuegos();
+        $categorias = $this->genreModel->getCategorias();
+        $juego = $this->gamesModel->getJuego($id);
+        $resultado = false;
+
+        foreach ($categorias as $categoria){
+            if ($juego->id_genero == $categoria){
+                $resultado = true;
+            }
+        }
+
+        if ($resultado == false){
+            if ($check == "Logeado" && isset($id)){
+                $this->gamesModel->deleteJuego($id);
+                $this->gamesView->showTodosLosJuegos();
+            }
+        }
+        else{
+            //poner un alert que diga que no se puede eliminar el juego porque hay un genero ligado a el
+            //por alguna razon no funciona
+            echo '<script type="text/javascript">alert("No se puede eliminar el juego porque hay un genero ligado a el");</script>';
+            //redireccionar a la lista de juegos
+            $this->gamesView->showHomeLocation();
+            
         }
     }
 

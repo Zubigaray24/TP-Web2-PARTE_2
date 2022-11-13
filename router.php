@@ -19,7 +19,6 @@
     $gamesController = new gamesController();
     $loginController = new logincontroller();
 
-
     // determina que camino seguir según la acción
     switch ($params[0]) {
 

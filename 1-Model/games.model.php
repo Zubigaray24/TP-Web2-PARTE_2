@@ -30,6 +30,30 @@ class gamesModel{
         return $juegos;
     }
 
+    //devuelve los juegos por precio de menor a mayor
+    function getJuegosPorPrecio(){
+        $sentencia = $this->db->prepare("SELECT * FROM juegos ORDER BY precio");
+        $sentencia->execute();
+        $juegos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $juegos;
+    }
+
+    //devuelve los juegos por orden ascendente alfabeticamente
+    function getJuegosPorOrdenAscendenteAlfabeticamente(){
+        $sentencia = $this->db->prepare("SELECT * FROM juegos ORDER BY nombre ASC");
+        $sentencia->execute();
+        $juegos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $juegos;
+    }
+
+    //devuelve los juegos por orden descendente alfabeticamente
+    function getJuegosPorOrdenDescendenteAlfabeticamente(){
+        $sentencia = $this->db->prepare("SELECT * FROM juegos ORDER BY nombre DESC");
+        $sentencia->execute();
+        $juegos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $juegos;
+    }
+
     function getListaIdGenero($id){
         $sentencia = $this->db->prepare("SELECT id_genero FROM juegos WHERE id_genero");
         $sentencia->execute(array($id));
@@ -40,6 +64,7 @@ class gamesModel{
     function addJuego($nombre, $fechalanzamiento, $desarrollador, $precio, $descripcion, $id_genero){
         $sentencia = $this->db->prepare("INSERT INTO juegos (nombre, fechalanzamiento, desarrollador, precio, descripcion, id_genero) VALUES (?, ?, ?, ?, ?, ?)");
         $sentencia->execute(array($nombre, $fechalanzamiento, $desarrollador, $precio, $descripcion, $id_genero));
+        return $this->db->lastInsertId();
     }
 
     function deleteJuego($id){

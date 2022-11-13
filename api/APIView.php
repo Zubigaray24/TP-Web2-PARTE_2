@@ -1,6 +1,6 @@
 <?php
 
-class APIView() {
+class APIView {
 	
 	public function response($data, $status) {
 	    header("Content-Type: application/json");
@@ -11,7 +11,11 @@ class APIView() {
 	  private function _requestStatus($code){
 	      $status = array(
 	        200 => "OK",
-	        404 => "Not found",
+			201 => "Created",
+			204 => "No Contest",
+			400 => "Bad Request",
+			401 => "Unautorize",
+	        404 => "Not Found",
 	        500 => "Internal Server Error"
 	      );
       return (isset($status[$code]))? $status[$code] : $status[500];
