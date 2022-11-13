@@ -7,10 +7,6 @@ define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"]
 // recurso solicitado
 $resource = $_GET["resource"];
 
-$orderBy = $_GET["orderBy"] ?? null;
-
-$orderMode = $_GET["orderMode"] ?? null;
-
 // método utilizado
 $method = $_SERVER["REQUEST_METHOD"];
 

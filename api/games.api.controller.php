@@ -17,8 +17,29 @@ class JuegoApiController extends ApiController{
 
   //recibe todos los juegos
   public function getJuegos($params = null) {
-    $juegos = $this->model->getNombre();
-    $this->view->response($juegos, 200); //
+    if (isset($_GET['order']) && isset($_GET['sort']))
+    {
+      if(($_GET['sort'] == "nombre") || ($_GET['SORT'] == "NOMBRE"))
+      {
+        if(($_GET['order'] == "ASC") || ($_GET['order'] == "asc"))
+        {
+          $juegos = $this->model->getJuegosPorOrdenAscendenteAlfabeticamente();
+          $this->view->response($juegos, 200);
+        }
+        elseif(($_GET['order'] == "DESC") || ($_GET['order'] == "desc"))
+        {
+          $juegos = $this->model->getJuegosPorOrdenDescendenteAlfabeticamente();
+          $this->view->response($juegos, 200);
+        }
+      }
+    }
+    else
+    {
+      $juegos = $this->model->getNombre();
+      $this->view->response($juegos, 200); //
+    }
+
+
   }
 
   //obtiene un juego solo
@@ -92,18 +113,5 @@ class JuegoApiController extends ApiController{
     else
       $this->view->response("El juego no fue creado", 500);
   }
-
-  //recibe los juegos ordenados alfabeticamente ascendentemente
-  public function getJuegosPorOrdenAscendenteAlfabeticamente($params = null){
-    $juegos = $this->model->getJuegosPorOrdenAscendenteAlfabeticamente();
-    return $this->view->response($juegos, 200);
-  }
-
-  //recibe los juegos ordenados alfabeticamente descendentemente
-  public function getJuegosPorOrdenDescendenteAlfabeticamente($params = null){
-    $juegos = $this->model->getJuegosPorOrdenDescendenteAlfabeticamente();
-    return $this->view->response($juegos, 200);
-  }
-
 
 }
