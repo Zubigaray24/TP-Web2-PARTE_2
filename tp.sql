@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-10-2022 a las 00:59:45
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Tiempo de generación: 14-11-2022 a las 19:50:22
+-- Versión del servidor: 10.4.25-MariaDB
+-- Versión de PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,11 +37,15 @@ CREATE TABLE `genero` (
 --
 
 INSERT INTO `genero` (`id_genero`, `nombregenero`) VALUES
-(1, 'Tiempo real'),
-(2, 'Disparos'),
-(3, 'Estrategia'),
-(4, 'Simulacion'),
-(5, 'Deporte');
+(2, 'Supervivencia'),
+(3, 'Mundo Abierto'),
+(4, 'Disparos'),
+(5, 'Accion'),
+(6, 'Deportes'),
+(7, 'Misterio'),
+(8, 'MOBA'),
+(9, 'MMORPG'),
+(10, 'Cartas');
 
 -- --------------------------------------------------------
 
@@ -64,8 +68,10 @@ CREATE TABLE `juegos` (
 --
 
 INSERT INTO `juegos` (`id_juego`, `nombre`, `fechalanzamiento`, `desarrollador`, `precio`, `descripcion`, `id_genero`) VALUES
-(16, 'Minecraft', '2012-06-19', 'Mojang', 29, 'Juego de cubitos', 4),
-(17, 'simon', '2022-10-13', 'valve', 23, 'juego de tiros', 5);
+(1, 'Terraria', '1983-04-04', 'Criterion', 19.99, 'Juego de supervivencia en 2-D', 3),
+(4, 'Black', '2012-08-21', 'Re-Logic', 29.99, 'asd', 5),
+(8, 'Among Us', '2019-12-03', 'Valvaya', 5.99, 'Encuentra al infiltrado', 4),
+(16, 'Project Zomboid', '2013-11-08', ' The Indie Stone', 9.99, 'Project Zomboid is the ultimate in zombie survival. Alone or in MP: you loot, build, craft, fight, farm and fish in a struggle to survive. A hardcore RPG skillset, a vast map, massively customisable sandbox and a cute tutorial raccoon await the unwary. So how will you die? All it takes is a bite..', 2);
 
 -- --------------------------------------------------------
 
@@ -118,13 +124,13 @@ ALTER TABLE `tablausuarios`
 -- AUTO_INCREMENT de la tabla `genero`
 --
 ALTER TABLE `genero`
-  MODIFY `id_genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `juegos`
 --
 ALTER TABLE `juegos`
-  MODIFY `id_juego` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_juego` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `tablausuarios`
