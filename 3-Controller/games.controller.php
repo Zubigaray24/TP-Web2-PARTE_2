@@ -90,12 +90,7 @@ class gamesController{
             }
         }
         else{
-            //poner un alert que diga que no se puede eliminar el juego porque hay un genero ligado a el
-            //por alguna razon no funciona
-            echo '<script type="text/javascript">alert("No se puede eliminar el juego porque hay un genero ligado a el");</script>';
-            //redireccionar a la lista de juegos
-            $this->gamesView->showHomeLocation();
-            
+            $this->gamesView->showTodosLosJuegos(); 
         }
     }
 
@@ -114,7 +109,7 @@ class gamesController{
             $this->gamesModel->editJuego($id_juego, $nombre, $f_d_l, $desarrollador, $precio, $descripcion, $genero);
             $this->gamesView->showTodosLosJuegos();    
         } else {
-            $this->gamesView->showHomeLocation();        
+            $this->gamesView->showTodosLosJuegos();        
         }
     }
 

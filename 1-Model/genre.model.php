@@ -3,7 +3,6 @@
 
 class genreModel{
 
-
     private $db;
 
     function __construct()
@@ -30,6 +29,7 @@ class genreModel{
     function addGenero($nombregenero){
             $sentencia = $this->db->prepare("INSERT INTO genero(nombregenero) VALUES (?)");
             $sentencia->execute(array($nombregenero));
+            return $this->db->lastInsertId();
     }
 
     function deleteGenero($id){
@@ -40,6 +40,22 @@ class genreModel{
     function editGenero($nombregenero, $id_genero){
             $sentencia = $this->db->prepare("UPDATE genero SET nombregenero=? WHERE id_genero=?");
             $sentencia->execute(array($nombregenero,$id_genero));
+    }
+
+        //devuelve los juegos por orden ascendente alfabeticamente
+    function getGenerosPorOrdenAscendenteAlfabeticamente(){
+        $sentencia = $this->db->prepare("SELECT * FROM genero ORDER BY nombregenero ASC");
+        $sentencia->execute();
+        $generos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $generos;
+    }
+    
+        //devuelve los juegos por orden descendente alfabeticamente
+    function getGenerosPorOrdenDescendenteAlfabeticamente(){
+        $sentencia = $this->db->prepare("SELECT * FROM genero ORDER BY nombregenero DESC");
+        $sentencia->execute();
+        $generos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $generos;
     }
 }
 ?>

@@ -56,9 +56,10 @@ class gamesView{
         $this->smarty->display('templates/agregarJuego.tpl');
     }
 
-    function showFormularioEditar($generos, $id,){
+    function showFormularioEditar($generos, $id/*, $valor*/){ //aca tengo que agregar un value y si no anda sacar el $valor
         $this->smarty->assign('id', $id);
         $this->smarty->assign('generos', $generos);
+        //$this->smarty->assign('valores', $valor); // y esto tambien
         $this->smarty->display('templates/editarJuego.tpl');
     }
 
