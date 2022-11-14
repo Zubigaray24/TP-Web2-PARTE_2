@@ -1,17 +1,19 @@
 <?php
 include_once './2-View/login.view.php';
+include_once './2-View/games.view.php';
 include_once './1-Model/login.model.php';
 include_once './Helper/AuthHelper.php';
 
 class logincontroller{
     private $view;
     private $model;
-    private $helper;
+    private $gamesView;
 
     public function __construct()
     {
         $this->view = new loginview();
         $this->model = new loginmodel();
+        $this->gamesView = new gamesView();
     }
     
     public function showLogin() {
@@ -60,6 +62,7 @@ class logincontroller{
         session_start();
         session_destroy();
         $this->view->ShowLogin("Cerraste sesión");
+        $this->gamesView->showHomeLocation();
     }
 }
 ?>
