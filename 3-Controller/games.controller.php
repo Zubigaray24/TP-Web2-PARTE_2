@@ -59,6 +59,9 @@ class gamesController{
                 $this->gamesView->showTodosLosJuegos();
             }
         }
+        else{
+            $this->gamesView->showHomeLocation();
+        }
 
     }
 
@@ -68,6 +71,9 @@ class gamesController{
         if ($check == "Logeado"){
             $generos=$this->genreModel->getCategorias();
             $this->gamesView->showFormulario($generos);
+        }
+        else{
+            $this->gamesView->showHomeLocation();
         }
     }
 
@@ -81,6 +87,9 @@ class gamesController{
         foreach ($categorias as $categoria){
             if ($juego->id_genero == $categoria){
                 $resultado = true;
+            }
+            else{
+                $this->gamesView->showTodosLosJuegos();
             }
         }
 

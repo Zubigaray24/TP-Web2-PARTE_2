@@ -34,6 +34,9 @@ class genreController{
             $generos=$this->genreModel->getCategorias();
             $this->gamesView->showFormularioGenero($generos);
         }
+        else{
+            $this->gamesView->showHomeLocation();
+        }
     }
 
     function addGenero(){
@@ -43,7 +46,10 @@ class genreController{
             $genero = $_POST['newgenero'];
             $this->genreModel->addGenero($genero);
             $this->gamesView->showTodosLosGeneros();  
-        }   
+        }
+        else{
+            $this->gamesView->showHomeLocation();
+        }
     }
 
     function deleteGenero($id){
@@ -56,6 +62,9 @@ class genreController{
         foreach ($juegos as $juego){
             if ($id == $juego->id_genero){
                 $resultado = true;
+            }
+            else {
+                $this->gamesView->showTodosLosGeneros();
             }
         }
 
