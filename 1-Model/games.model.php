@@ -23,6 +23,13 @@ class gamesModel{
         return $juego;
     }
 
+    /*function getIdJuego(){
+        $sentencia = $this->db->prepare("SELECT id_juego FROM juegos WHERE id_juego");
+        $sentencia->execute(array());
+        $id = $sentencia->fetch(PDO::FETCH_OBJ);
+        return $id;
+    }*/
+
     function getJuegosPorGenero($id_genero){
         $sentencia = $this->db->prepare("SELECT * FROM juegos WHERE id_genero = ?");
         $sentencia->execute(array($id_genero));

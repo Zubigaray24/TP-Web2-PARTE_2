@@ -5,7 +5,7 @@
 <form action="{BASE_URL}editarGenero" method="POST">
     
     <label>Nombre</label>
-    <input type="text" name="editnombregenero">
+    <input type="text" name="editnombregenero" value="{$nombre->nombregenero}">
 
     <input type="hidden" name="idgenero" value="{$id}">
 

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.2.1, created on 2022-11-08 01:33:55
+/* Smarty version 4.2.1, created on 2022-11-15 02:13:42
   from 'C:\xampp\htdocs\TP-Web2\templates\listajuegos.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.2.1',
-  'unifunc' => 'content_6369a3f3a94959_02468547',
+  'unifunc' => 'content_6372e7c6c5a6a3_77137147',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ed937123f01a128eb75f8e72462c6d945281a143' => 
     array (
       0 => 'C:\\xampp\\htdocs\\TP-Web2\\templates\\listajuegos.tpl',
-      1 => 1667866964,
+      1 => 1668473036,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6369a3f3a94959_02468547 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6372e7c6c5a6a3_77137147 (Smarty_Internal_Template $_smarty_tpl) {
 ?><h1><a href="<?php echo BASE_URL;?>
 home">HOME</a></h1>
 <h2>Todos los juegos</h2>

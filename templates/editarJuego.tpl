@@ -2,35 +2,34 @@
 
 <h2>Editar juego</h2>
 
-<form action="{BASE_URL}editarJuego" method="POST">
+    <form action="{BASE_URL}editarJuego" method="POST">
 
+        <label>Nombre</label>
+        <input type="text" name="editnombre" value="{$juego->nombre}">
 
-    <label>Nombre</label>
-    <input type="text" name="editnombre">
+        <label>Fecha de lanzamiento</label>
+        <input type="date" name="editfechalanzamiento" value="{$juego->fechalanzamiento}">
 
-    <label>Fecha de lanzamiento</label>
-    <input type="date" name="editfechalanzamiento">
+        <label>Desarrollador</label>
+        <input type="text" name="editdesarrollador" value="{$juego->desarrollador}">
 
-    <label>Desarrollador</label>
-    <input type="text" name="editdesarrollador">
+        <label>Precio</label>
+        <input type="number" name="editprecio" value="{$juego->precio}">
 
-    <label>Precio</label>
-    <input type="number" name="editprecio">
+        <label>Descripcion</label>
+        <input type="text" name="editdescripcion" value="{$juego->descripcion}">
 
-    <label>Descripcion</label>
-    <input type="text" name="editdescripcion">
+        <label>Genero</label>
+        <select name="editidgenero">
+            {foreach from= $generos item= $genero}
+                <option value={$genero->id_genero}>
+                    {$genero->nombregenero}
+                </option>
+            {/foreach}
+        </select>
 
-    <label>Genero</label>
-    <select name="editidgenero">
-        {foreach from= $generos item= $genero}
-            <option value={$genero->id_genero}>
-                {$genero->nombregenero}
-            </option>
-        {/foreach}
-    </select>
+        <input type="hidden" name="idjuego" value="{$juego->id_juego}">
 
-    <input type="hidden" name="idjuego" value="{$id}">
+        <button type="submit">Editar juego</button>
 
-    <button type="submit">Editar juego</button>
-
-</form>
+    </form>

@@ -47,7 +47,6 @@ class genreController{
     }
 
     function deleteGenero($id){
-        $check = $this->helper->logged();
 
         $check = $this->helper->logged();
 
@@ -67,14 +66,8 @@ class genreController{
             }
         }
         else{
-            //poner un alert que diga que no se puede eliminar el juego porque hay un genero ligado a el
-            //por alguna razon no funciona
-            echo '<script type="text/javascript">alert("No se puede eliminar el juego porque hay un genero ligado a el");</script>';
-            //redireccionar a la lista de juegos
             $this->gamesView->showHomeLocation();
         }
-
-
     }
 
     function showFormularioEditGenero($id){
@@ -83,7 +76,8 @@ class genreController{
         if ($check == "Logeado"){
             if ($id != null){
                 if (isset($id)) {
-                    $this->gamesView->showFormularioGeneroEditar($id);
+                    $nombre = $this->genreModel->getCategoria($id);
+                    $this->gamesView->showFormularioGeneroEditar($id, $nombre);
                 } else {
                     $this->gamesView->showTodosLosGeneros();
                 }
@@ -96,9 +90,6 @@ class genreController{
         $nombre = $_POST['editnombregenero'];
         $check = $this->helper->logged();
 
-        var_dump($id);
-        var_dump($nombre);
-        //if(($check == 'Logeado')&&(isset($id))&&(isset($nombre))){ //Saco el id porque no lo tengo que modificar
         if(($check == 'Logeado')&&(isset($nombre))){
             $this->genreModel->editGenero($nombre,$id);
             $this->gamesView->showTodosLosGeneros();  
@@ -107,7 +98,6 @@ class genreController{
             $this->gamesView->showHomeLocation(); 
         }
     }
-
 }
 
 ?>

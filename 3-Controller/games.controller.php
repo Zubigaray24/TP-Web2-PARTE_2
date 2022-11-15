@@ -28,6 +28,7 @@ class gamesController{
     function showGame(){
         $check = $this->helper->logged();
         $lista = $this->gamesModel->getNombre();
+        //$id = $this->gamesModel->getIdJuego();
         $this->gamesView->showJuego($lista, $check);
     }
 
@@ -122,8 +123,8 @@ class gamesController{
             if ($id != null){
                 if (isset($id)) {
                     $generos = $this->genreModel->getCategorias();
-                    $datos = $this->gamesModel->getNombre();
-                    $this->gamesView->showFormularioEditar($generos, $id, $datos);
+                    $datos = $this->gamesModel->getJuego($id);
+                    $this->gamesView->showFormularioEditar($generos, $datos);
                 } else {
                     $this->gamesView->showTodosLosJuegos();
                 }
